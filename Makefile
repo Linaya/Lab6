@@ -1,6 +1,6 @@
-.PHONY: clean app test
+.PHONY: clean prepare app test
 
-bin/main: obj/main.o obj/app.o
+bin/main: prepare obj/main.o obj/app.o
 	gcc -Wall -o bin/main obj/main.o obj/app.o -lm
 
 bin/test: obj/app.o obj/app_test.o obj/ctest.o
@@ -20,6 +20,10 @@ obj/ctest.o: test/ctest.c
 
 clean:
 	rm -f bin/* obj/*
+
+prepare:
+	mkdir -p bin
+	mkdir -p obj
 
 app: bin/main
 	bin/main
